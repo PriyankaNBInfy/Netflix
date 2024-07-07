@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import Header from "../components/Header";
 import { LOGO_URL } from "../utils/constants";
 import { validateData } from "../utils/validate";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -12,11 +14,28 @@ const Login = () => {
 
   const handleSubmit = () => {
     const message = validateData(
-      name.current.value,
       email.current.value,
       password.current.value
     );
     setErrorMessage(message);
+
+    if(message) return;
+
+    if(!isSignIn) {
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        console.log(user);
+      
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+    } else {
+  }
   };
 
   const toggleSignIn = () => {
