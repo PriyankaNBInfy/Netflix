@@ -42,8 +42,7 @@ const Login = () => {
           })
             .then(() => {
               // Profile updated!
-              dispatch(addUser(user));
-              navigate("/browse");
+              dispatch(addUser(auth.currentUser));
             })
             .catch((error) => {
               // An error occurred
@@ -69,7 +68,6 @@ const Login = () => {
           console.log(user);
           const { displayName, email, uid } = user;
           dispatch(addUser({ displayName, email, uid }));
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;

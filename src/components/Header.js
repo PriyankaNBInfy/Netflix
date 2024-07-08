@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { LOGO_URL, USER_ICON } from "../utils/constants";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
-import { removeUser } from "../features/user/userSlice";
+import { addUser, removeUser } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, displayName, email } = user;
+        dispatch(addUser({ uid: uid, displayName: displayName, email: email }));
+        navigate("/browse");
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
         dispatch(removeUser());
-        navigate("/");
       })
       .catch((error) => {
         // An error happened.
