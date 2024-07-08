@@ -5,3 +5,12 @@ export const LOGO_URL =
 
 export const USER_ICON =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK8cu1CSWR5Olmpms_4WnF6FIiItNMjQP4BA&s";
+
+export const API_OPTIONS = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MzViOTAwNDE3ZWE2NmJmYTNlMjgwMGY1MTg0OWYyZSIsIm5iZiI6MTcyMDQzODg5Mi45MzYyNzUsInN1YiI6IjY2OGJjZTdhODEwM2RjYjY0NTlhMGM5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QcpYLrg6dTFGw_nfwPaBLbdEBGjKZTgr7zhrcD91C-Y",
+  },
+};

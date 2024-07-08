@@ -11,7 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, displayName, email } = user;
         dispatch(addUser({ uid: uid, displayName: displayName, email: email }));
@@ -21,6 +21,8 @@ const Header = () => {
         dispatch(removeUser());
         navigate("/");
       }
+
+      return () => unsubscribe();
     });
   }, []);
 
@@ -35,7 +37,7 @@ const Header = () => {
       });
   };
   return (
-    <div className="absolute w-full h-20 bg-gradient-to-b from-black flex justify-between">
+    <div className="absolute w-screen h-20 bg-gradient-to-r from-black flex justify-between">
       <img className="w-36 " src={LOGO_URL} alt="logo" />
       <div className="flex p-4 ">
         <img
@@ -43,7 +45,9 @@ const Header = () => {
           src={USER_ICON}
           alt="user"
         />
-        <button onClick={handleSignOut}>(Sign Out)</button>
+        <button className="text-white" onClick={handleSignOut}>
+          (Sign Out)
+        </button>
       </div>
     </div>
   );
