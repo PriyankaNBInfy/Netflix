@@ -1,12 +1,16 @@
 import React, { useRef, useState } from "react";
 import Header from "../components/Header";
-import { LOGO_URL } from "../utils/constants";
+import { BACKGROUND_IMAGE } from "../utils/constants";
 import { validateData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../features/user/userSlice";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -14,6 +18,8 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
     const message = validateData(email.current.value, password.current.value);
@@ -30,6 +36,19 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              // Profile updated!
+              dispatch(addUser(user));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrorMessage(error.message);
+            });
           console.log(user);
         })
         .catch((error) => {
@@ -48,6 +67,9 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
+          const { displayName, email, uid } = user;
+          dispatch(addUser({ displayName, email, uid }));
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -66,9 +88,9 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          className="w-36 h-20 bg-gradient-to-r from-black"
-          src={LOGO_URL}
-          alt="logo"
+          className="bg-black"
+          src={BACKGROUND_IMAGE}
+          alt="background-image"
         />
       </div>
       <form
