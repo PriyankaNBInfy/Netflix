@@ -2,7 +2,10 @@ import React, { useRef, useState } from "react";
 import Header from "../components/Header";
 import { LOGO_URL } from "../utils/constants";
 import { validateData } from "../utils/validate";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 const Login = () => {
@@ -13,29 +16,46 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = () => {
-    const message = validateData(
-      email.current.value,
-      password.current.value
-    );
+    const message = validateData(email.current.value, password.current.value);
     setErrorMessage(message);
 
-    if(message) return;
+    if (message) return;
 
-    if(!isSignIn) {
-      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
-      .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        console.log(user);
-      
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+    if (!isSignIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+          setErrorMessage(errorMessage);
+        });
     } else {
-  }
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          setErrorMessage(errorMessage);
+        });
+    }
   };
 
   const toggleSignIn = () => {
