@@ -14,3 +14,7 @@ export const API_OPTIONS = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MzViOTAwNDE3ZWE2NmJmYTNlMjgwMGY1MTg0OWYyZSIsIm5iZiI6MTcyMDQzODg5Mi45MzYyNzUsInN1YiI6IjY2OGJjZTdhODEwM2RjYjY0NTlhMGM5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QcpYLrg6dTFGw_nfwPaBLbdEBGjKZTgr7zhrcD91C-Y",
   },
 };
+
+export const CDN_URL = "https://image.tmdb.org/t/p/w400/";
+
+export const movieTypes = ["now_playing", "popular", "top_rated", "upcoming"];

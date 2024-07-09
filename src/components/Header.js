@@ -37,9 +37,9 @@ const Header = () => {
       });
   };
   return (
-    <div className="absolute w-screen h-20 bg-gradient-to-r from-black flex justify-between">
+    <div className="absolute w-screen h-20 bg-gradient-to-b from-black flex justify-between">
       <img className="w-36 " src={LOGO_URL} alt="logo" />
-      <div className="flex p-4 ">
+      <div className="flex p-4 bg-black mr-2">
         <img
           className="w-10 h-10 justify-between rounded m-1 bg-gradient-to-b from-black"
           src={USER_ICON}

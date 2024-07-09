@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
-import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
+import useGetMovies from "../hooks/useGetMovies";
+import { movieTypes } from "../utils/constants";
 
 const Browse = () => {
-  useNowPlayingMovies();
+  useGetMovies(movieTypes[0]);
+  useGetMovies(movieTypes[1]);
+  useGetMovies(movieTypes[2]);
+  useGetMovies(movieTypes[3]);
+
   return (
     <div>
       <Header />
