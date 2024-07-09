@@ -4,18 +4,28 @@ import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import useGetMovies from "../hooks/useGetMovies";
 import { movieTypes } from "../utils/constants";
+import { useSelector } from "react-redux";
+import GptSearch from "./GptSearch";
 
 const Browse = () => {
   useGetMovies(movieTypes[0]);
   useGetMovies(movieTypes[1]);
   useGetMovies(movieTypes[2]);
   useGetMovies(movieTypes[3]);
+  const showGptSearch = useSelector((store) => store.gpt.isGptSearch);
 
   return (
     <div>
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+      {showGptSearch ? (
+        <GptSearch />
+      ) : (
+        <>
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
+
       {/* 
       MainContainer
         - Video background
