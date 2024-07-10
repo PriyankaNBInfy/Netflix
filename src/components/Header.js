@@ -12,6 +12,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const showGptSearch = useSelector((store) => store.gpt.isGptSearch);
+  const currentUser = useSelector((store) => store.user.user);
+  console.log(currentUser);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -48,37 +50,46 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-screen h-20 bg-gradient-to-b from-black flex justify-between">
-      <img className="w-36 " src={LOGO_URL} alt="logo" />
-      <div className="flex p-4 mr-2 z-20">
-        {showGptSearch && (
-          <select
-            className="px-1 mx-2 bg-gray-900 rounded text-white"
-            onChange={(e) => handleLanguageChange(e.target.value)}
-          >
-            {LANGUAGE.map((lang) => (
-              <option key={lang.identifier} value={lang.identifier}>
-                {lang.name}
-              </option>
-            ))}
-          </select>
-        )}
+    <div className="w-screen h-20 bg-gradient-to-b from-black flex flex-col md:flex-row justify-between">
+      <img
+        className="w-36 z-20 pl-7 mx-auto md:mx-0"
+        src={LOGO_URL}
+        alt="logo"
+      />
+      {currentUser && (
+        <div className="flex p-4 mr-2 z-20 justify-between">
+          {showGptSearch && (
+            <select
+              className="px-1 mx-2 bg-gray-900 rounded text-white"
+              onChange={(e) => handleLanguageChange(e.target.value)}
+            >
+              {LANGUAGE.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
 
-        <button
-          className="py-2 px-4 mx-2 bg-purple-800 text-white rounded cursor-pointer"
-          onClick={handleGptSearchClick}
-        >
-          {showGptSearch ? "Home" : "GPT Search"}
-        </button>
-        <img
-          className="w-10 h-10 justify-between rounded m-1 bg-gradient-to-b from-black"
-          src={USER_ICON}
-          alt="user"
-        />
-        <button className="text-white" onClick={handleSignOut}>
-          (Sign Out)
-        </button>
-      </div>
+          <button
+            className="px-2 -mt-9 h-6 text-xs font-thin bg-purple-800 text-white rounded cursor-pointer md:py-2 md:px-4 md:-mt-0 md:text-lg md:h-auto md:font-normal"
+            onClick={handleGptSearchClick}
+          >
+            {showGptSearch ? "Home" : "GPT Search"}
+          </button>
+          <img
+            className="invisible md:visible w-10 h-10 justify-between rounded m-1 bg-gradient-to-b from-black"
+            src={USER_ICON}
+            alt="user"
+          />
+          <button
+            className="text-white text-xs font-thin -mt-24 -ml-5 md:text-lg md:font-normal md:mt-0 md:ml-0"
+            onClick={handleSignOut}
+          >
+            (Sign Out)
+          </button>
+        </div>
+      )}
     </div>
   );
 };

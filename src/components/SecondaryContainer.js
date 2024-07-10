@@ -23,7 +23,7 @@ const SecondaryContainer = () => {
   const upcoming = useSelector((store) => store.movie[camelCasedMovieTypes[3]]);
   return (
     <div className="bg-black">
-      <div className="-mt-64 relative z-20">
+      <div className="-mt-6 md:-mt-44 relative z-20">
         <MovieList title={titleCaseMovieTypes[0]} movies={nowPlaying} />
         <MovieList title={titleCaseMovieTypes[1]} movies={popular} />
         <MovieList title={titleCaseMovieTypes[2]} movies={topRated} />

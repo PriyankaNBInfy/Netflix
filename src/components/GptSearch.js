@@ -6,9 +6,9 @@ import { BACKGROUND_IMAGE } from "../utils/constants";
 const GptSearch = () => {
   return (
     <div>
-      <div className="absolute -z-20">
+      <div className="fixed -z-20 -mt-48">
         <img
-          className="bg-black"
+          className="h-screen object-cover md:h-full"
           src={BACKGROUND_IMAGE}
           alt="background-image"
         />
