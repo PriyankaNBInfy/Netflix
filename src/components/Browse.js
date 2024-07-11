@@ -8,10 +8,11 @@ import { useSelector } from "react-redux";
 import GptSearch from "./GptSearch";
 
 const Browse = () => {
-  useGetMovies(movieTypes[0]);
-  useGetMovies(movieTypes[1]);
-  useGetMovies(movieTypes[2]);
-  useGetMovies(movieTypes[3]);
+  // console.log(movieTypes.nowPlaying);
+  // useGetMovies(movieTypes.nowPlaying);
+  // useGetMovies(movieTypes.popular);
+  // useGetMovies(movieTypes.topRated);
+  // useGetMovies(movieTypes.upcoming);
   const showGptSearch = useSelector((store) => store.gpt.isGptSearch);
 
   return (

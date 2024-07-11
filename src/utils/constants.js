@@ -16,7 +16,12 @@ export const API_OPTIONS = {
 
 export const CDN_URL = "https://image.tmdb.org/t/p/w400/";
 
-export const movieTypes = ["now_playing", "popular", "top_rated", "upcoming"];
+export const movieTypes = {
+  nowPlaying: "now_playing",
+  popular: "popular",
+  topRated: "top_rated",
+  upcoming: "upcoming",
+};
 
 export const LANGUAGE = [
   { identifier: "en", name: "English" },

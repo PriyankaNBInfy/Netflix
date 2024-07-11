@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { API_OPTIONS } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addTrailer } from "../features/movies/movieSlice";
 
 const useTrailer = (movieId) => {
-  const [trailer, setTrailer] = useState();
+  const dispatch = useDispatch();
+  const trailer = useSelector((store) => store.movie.trailer);
 
   useEffect(() => {
-    getTrailer();
+    !trailer && getTrailer();
   }, []);
 
   const getTrailer = async () => {
@@ -20,10 +23,8 @@ const useTrailer = (movieId) => {
     const trailerVideo = json.results?.filter(
       (video) => video.name === "Official Trailer"
     );
-    setTrailer(trailerVideo[0]);
+    dispatch(addTrailer(trailerVideo[0]));
   };
-
-  return trailer;
 };
 
 export default useTrailer;

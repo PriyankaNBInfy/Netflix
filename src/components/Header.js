@@ -13,7 +13,7 @@ const Header = () => {
   const navigate = useNavigate();
   const showGptSearch = useSelector((store) => store.gpt.isGptSearch);
   const currentUser = useSelector((store) => store.user.user);
-  console.log(currentUser);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {

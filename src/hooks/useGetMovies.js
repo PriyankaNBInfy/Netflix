@@ -17,16 +17,16 @@ const useGetMovies = (movieType) => {
     );
     const json = await data.json();
     switch (movieType) {
-      case movieTypes[0]:
+      case movieTypes.nowPlaying:
         dispatch(addNowPlayingMovies(json.results));
         break;
-      case movieTypes[1]:
+      case movieTypes.popular:
         dispatch(addPopularMovies(json.results));
         break;
-      case movieTypes[2]:
+      case movieTypes.topRated:
         dispatch(addTopRatedMovies(json.results));
         break;
-      case movieTypes[3]:
+      case movieTypes.upcoming:
         dispatch(addUpcomingMovies(json.results));
         break;
 
