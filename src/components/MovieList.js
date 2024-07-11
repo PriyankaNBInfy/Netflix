@@ -2,8 +2,6 @@ import React from "react";
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
-  console.log(title);
-  console.log(movies);
   const titleWithSpaces = title.toString().replace(/([A-Z])/g, " $1");
   const titleCased =
     titleWithSpaces.charAt(0).toUpperCase() + titleWithSpaces.slice(1);

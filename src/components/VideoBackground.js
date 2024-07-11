@@ -3,16 +3,12 @@ import useTrailer from "../hooks/useTrailer";
 import { useGetTrailerQuery } from "../features/api/apiSlice";
 
 const VideoBackground = ({ movieId }) => {
-  // const trailer = useTrailer(movieId);
-  // console.log("SUCCESS :)");
   const { data, isSuccess, isLoading, isError, error } =
     useGetTrailerQuery(movieId);
   let content;
   if (isLoading) {
-    // console.log("IF");
     content = <div>Loading...</div>;
   } else if (isSuccess) {
-    // console.log("SUCCESS :)");
     const trailerVideo = data?.results?.filter(
       (video) => video.name === "Official Trailer"
     );
@@ -30,7 +26,6 @@ const VideoBackground = ({ movieId }) => {
       ></iframe>
     );
   } else if (isError) {
-    // console.log("ERROR :(");
     content = <div>{error.toString()}</div>;
   }
   return <div>{content}</div>;
