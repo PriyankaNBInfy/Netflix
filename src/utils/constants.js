@@ -7,11 +7,8 @@ export const USER_ICON =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK8cu1CSWR5Olmpms_4WnF6FIiItNMjQP4BA&s";
 
 export const API_OPTIONS = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
-  },
+  accept: "application/json",
+  Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
 };
 
 export const CDN_URL = "https://image.tmdb.org/t/p/w400/";

@@ -9,14 +9,14 @@ export const apiSlice = createApi({
       query: (movieId) => ({
         url: `${movieId}/videos?language=en-US`,
         method: "GET",
-        options: API_OPTIONS,
+        headers: API_OPTIONS,
       }),
     }),
     getMovies: builder.query({
       query: (movieType) => ({
         url: `${movieType}?page=1`,
         method: "GET",
-        options: API_OPTIONS,
+        headers: API_OPTIONS,
       }),
     }),
   }),
